@@ -1,0 +1,24 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      with:
+         platforms: linux/amd64
+         context: .
+         push: true
+         tags: |
+           ${{ secrets.DOCKERHUB_USERNAME }}/wfeyegemini:${{ github.ref_name }}
+           ${{ secrets.DOCKERHUB_USERNAME }}/wfeyegemini:latest
