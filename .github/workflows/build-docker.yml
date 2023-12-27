@@ -15,7 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build and push
-      with:
-          context: .
-          push: true
-          tag: edith/gemini:latest
+      run: docker build . --file Dockerfile --tag edith/gemini:latest
